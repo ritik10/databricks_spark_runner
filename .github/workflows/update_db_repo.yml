@@ -1,0 +1,20 @@
+name: Update repo in Databricks
+# This action runs with each merge to <branch-name>
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  run-test-job:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Update repo in Databricks
+        env:
+          # Databricks Access Token stored in Github Actions Secrets
+          DATABRICKS_ACCESS_TOKEN: ${{ secrets.DATABRICKS_ACCESS_TOKEN }}
+        run: |
+          echo "Calling repos Update API to update branch."
+          curl -n -X PATCH https://dbc-3dbf6cb5-3dc6.cloud.databricks.com//api/2.0/repos/<repo-id> \
+            -H 'Authorization: Bearer '$DATABRICKS_ACCESS_TOKEN \
+            -d '{"branch": "main"}'
