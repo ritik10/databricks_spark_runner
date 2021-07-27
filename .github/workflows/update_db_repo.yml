@@ -15,6 +15,6 @@ jobs:
           DATABRICKS_ACCESS_TOKEN: ${{ secrets.DATABRICKS_ACCESS_TOKEN }}
         run: |
           echo "Calling repos Update API to update branch."
-          curl -n -X PATCH https://dbc-3dbf6cb5-3dc6.cloud.databricks.com//api/2.0/repos/<repo-id> \
+          curl -n -X PATCH https://dbc-3dbf6cb5-3dc6.cloud.databricks.com//api/2.0/repos/951753448453150 \
             -H 'Authorization: Bearer '$DATABRICKS_ACCESS_TOKEN \
             -d '{"branch": "main"}'
